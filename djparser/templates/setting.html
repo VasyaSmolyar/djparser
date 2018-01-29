@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block 'content' %}
+<h1 class="mt-5">Настройки парсера</h1>
+{% if ok %}
+<div class="alert alert-success">
+  {{ok}}
+</div>
+{% endif %}
+<form method="POST">
+  {% csrf_token %}
+  <h3>Заголовки:</h3>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">User-Agent:</span>
+      </div>
+      <input type="text" name="User-Agent" value="{{ agent }}" class="form-control" aria-describedby="basic-addon1">
+    </div>
+    <br>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon2">Cookie:</span>
+      </div>
+      <input type="text" name="Cookie" value="{{ cookie }}" class="form-control" aria-describedby="basic-addon2">
+    </div>
+    <br>
+  <h3>Прокси:</h3>
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon3">HTTP:</span>
+    </div>
+    <input type="text" name="http" value="{{ http }}" class="form-control" aria-describedby="basic-addon3">
+  </div>
+  <br>
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon4">HTTPS:</span>
+    </div>
+    <input type="text" name="https" value="{{ https }}" class="form-control" aria-describedby="basic-addon4">
+  </div>
+  <br>
+  <input type="submit" value="Сохранить" class="btn btn-primary">
+</form>
+{% endblock %}

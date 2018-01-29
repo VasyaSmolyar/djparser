@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block 'content' %}
+  <h1 class="mt-5">{{site.url}}</h1>
+  <br>
+  <table class="table table-dark">
+  {% for i in res %}
+    <tr>
+      <td>{{i}}</td>
+    </tr>
+  {% endfor %}
+  </table>
+{% endblock %}

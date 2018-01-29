@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block 'content' %}
+  <h1 class="mt-5">{{site.url}}</h1>
+  <br>
+  <table class="table table-dark">
+  {% for i in res %}
+  <tr>
+    <td>{{i}}</td>
+  </tr>
+  {% endfor %}
+  </table>
+  <ul class="pagination">
+    {% if res.has_previous %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{res.previos_page_number}}">Previous</a>
+    </li>
+    <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
+    {% endif %}
+    <li class="page-item active">
+      <a class="page-link" href="#">{{res.number}}<span class="sr-only">(current)</span></a>
+    </li>
+    {% if res.has_next %}
+    <li class="page-item"><a class="page-link" href="?page={{res.paginator.num_pages}}">{{res.paginator.num_pages}}</a></li>
+    <li class="page-item">
+      <a class="page-link" href="?page={{res.next_page_number}}">Next</a>
+    </li>
+    {% endif %}
+  </ul>
+{% endblock %}

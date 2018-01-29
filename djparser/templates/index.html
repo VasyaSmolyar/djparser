@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block 'content' %}
+  <h1 class="mt-5">Список URL для парсинга</h1>
+  {% if err %}
+  <div class="alert alert-danger">
+    {{ err }}
+  </div>
+  {% endif %}
+  <form method="POST">
+    {% csrf_token %}
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">URL запрос</span>
+      </div>
+      <input type="text" name="url" value="" class="form-control" aria-describedby="basic-addon1">
+    </div>
+    <br>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon2">XPath выражение</span>
+      </div>
+      <input type="text" name="query" value="" class="form-control" aria-describedby="basic-addon2">
+    </div>
+    <br>
+    <input type="submit" value="Добавить" class="btn btn-primary">
+  </form>
+  <br>
+  <table class="table table-dark">
+    <tr>
+      <th>URL</th>
+      <th>Запрос</th>
+      <th>Действие</th>
+    </tr>
+  {% for site in sites %}
+    <tr>
+      <td>{{site.url}}</td>
+      <td>{{site.query}}</td>
+      <td><a href="{% url 'djparser:parse' site.pk %}">Парсить</a>
+        <a href="{% url 'djparser:result' site.pk %}">Результат</a>
+        <a href="{% url 'djparser:delete' site.pk %}">Удалить</a></td>
+    </tr>
+  {% endfor %}
+  </table>
+{% endblock %}
